@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ClockIcon } from "@heroicons/react/24/solid";
 import { TypeTime } from "@/shared/types";
+import { motion } from "framer-motion";
 
 const Time = () => {
   const [time, setTime] = useState<TypeTime>({
@@ -36,8 +37,19 @@ const Time = () => {
       period: period,
     };
   };
+
   return (
-    <div className="flex items-center absolute top-6 left-6 p-4 bg-black-primary border rounded-md">
+    <motion.div
+      className="flex items-center absolute top-6 right-6 p-4 bg-black-primary border rounded-md"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ duration: 0.5 }}
+      variants={{
+        hidden: { opacity: 0, x: -50 },
+        visible: { opacity: 1, x: 0 },
+      }}
+    >
       <ClockIcon className="text-white w-6 h-6 inline-block mr-2" />
       <div className="inline-block min-w-[70px]">
         <span className="text-white">{time.hours}:</span>
@@ -45,7 +57,7 @@ const Time = () => {
         <span className="text-white">{time.seconds}</span>
       </div>
       <span className="text-white"> {time.period}</span>
-    </div>
+    </motion.div>
   );
 };
 
