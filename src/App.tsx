@@ -1,9 +1,13 @@
-
+import Background from "./components/Background";
+import Menu from "./components/Menu";
+import Time from "./components/Time";
 
 function App() {
   return (
-    <div className="app">
-      <h1 className="text-3xl font-bold underline text-gray-primary">Hello world!</h1>
+    <div className="app relative">
+      <Background />
+      <Menu />
+      <Time />
     </div>
   );
 }
