@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const Logo = () => {
   return (
     <motion.div
-      className="absolute top-6 left-6 bg-black-primary rounded-md border"
+      className="absolute top-6 left-6"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.5 }}

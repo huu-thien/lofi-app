@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
-import { ClockIcon } from "@heroicons/react/24/solid";
+import { ClockIcon } from "@heroicons/react/24/outline";
 import { TypeTime } from "@/shared/types";
 import { motion } from "framer-motion";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 const Time = () => {
+  const isAboveMediumScreens = useMediaQuery("(max-width: 768px)");
+
+  const mediumScreenStyle = `absolute top-10 right-6 p-4 bg-black-primary border rounded-md`
+
   const [time, setTime] = useState<TypeTime>({
     hours: "0",
     minutes: "0",
@@ -37,10 +42,10 @@ const Time = () => {
       period: period,
     };
   };
-
+  // absolute top-6 right-6
   return (
     <motion.div
-      className="flex items-center absolute top-6 right-6 p-4 bg-black-primary border rounded-md"
+      className={isAboveMediumScreens ? mediumScreenStyle : ""}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.5 }}

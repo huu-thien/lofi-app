@@ -4,3 +4,12 @@ export interface TypeTime {
   seconds: string;
   period: string;
 }
+export interface SongType {
+  name: string;
+  src: string;
+}
+export interface PlaylistType {
+  id: number;
+  name: string;
+  songs: SongType[];
+}
