@@ -1,4 +1,4 @@
-import Video from "@/assets/videos/lake-house-outside/outside_night.mp4";
+import Video from "@/assets/videos/lake-house-outside/outside_day_rain.mp4";
 
 
 const Background = () => {

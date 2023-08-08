@@ -36,15 +36,39 @@ const ControlMusic = () => {
       )}
       <ForwardIcon className={iconStyle} />
       {isMuted ? (
-        <SpeakerXMarkIcon
-          className={iconStyle}
-          onClick={() => setIsMuted(!isMuted)}
-        />
+        <Tippy
+          delay={[300, 300]}
+          hideOnClick
+          interactive
+          offset={[10, 20]}
+          render={() => (
+            <p className="p-3 bg-black-primary text-white border rounded-md">
+              Unmute
+            </p>
+          )}
+        >
+          <SpeakerXMarkIcon
+            className={iconStyle}
+            onClick={() => setIsMuted(!isMuted)}
+          />
+        </Tippy>
       ) : (
-        <SpeakerWaveIcon
-          className={iconStyle}
-          onClick={() => setIsMuted(!isMuted)}
-        />
+        <Tippy
+          delay={[300, 300]}
+          hideOnClick
+          interactive
+          offset={[10, 20]}
+          render={() => (
+            <div className="bg-black-primary p-3 border rounded-md">
+              <input type="range" min={0} max={100} className="accent-pink-500 cursor-pointer"/>
+            </div>
+          )}
+        >
+          <SpeakerWaveIcon
+            className={iconStyle}
+            onClick={() => setIsMuted(!isMuted)}
+          />
+        </Tippy>
       )}
       <Tippy
         delay={[300, 300]}

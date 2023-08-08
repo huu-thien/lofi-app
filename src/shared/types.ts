@@ -13,3 +13,10 @@ export interface PlaylistType {
   name: string;
   songs: SongType[];
 }
+export interface ScenesType {
+  id: number;
+  title: string;
+  video_sun: string;
+  video_night: string;
+  image: string;
+}
