@@ -25,40 +25,41 @@ const ControlScenes = ({
   const tabletScreenStyle = `absolute top-10 left-4 p-3 bg-black-primary border rounded-md flex`;
   return (
     <div className={isAboveTabletScreens ? tabletScreenStyle : "flex"}>
-      
-      <Tippy
-        delay={[300, 300]}
-        hideOnClick
-        interactive
-        offset={[10, 20]}
-        render={() => (
-          <Swiper
-            className="flex items-center bg-black-primary p-6 max-w-[400px] border rounded-md"
-            spaceBetween={8}
-            slidesPerView={2}
-          >
-            {ScenesList.map((scene: ScenesType, index: number) => (
-              <SwiperSlide
-                key={`${scene.title}-${index}`}
-                className="cursor-pointer mx-2 hover:scale-[1.08] transition duration-400"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setScenes(scene);
-                }}
-              >
-                <img
-                  className="min-h-[120px] object-cover rounded-md"
-                  src={scene.image}
-                  alt={scene.title}
-                />
-                <p className="text-white py-2 text-center">{scene.title}</p>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        )}
-      >
-        <PhotoIcon className={iconStyle} />
-      </Tippy>
+      <div>
+        <Tippy
+          delay={[300, 300]}
+          hideOnClick={false}
+          interactive
+          offset={[10, 20]}
+          render={() => (
+            <Swiper
+              className="flex items-center bg-black-primary p-6 max-w-[400px] border rounded-md"
+              spaceBetween={8}
+              slidesPerView={2}
+            >
+              {ScenesList.map((scene: ScenesType, index: number) => (
+                <SwiperSlide
+                  key={`${scene.title}-${index}`}
+                  className="cursor-pointer mx-2 hover:scale-[1.08] transition duration-400"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setScenes(scene);
+                  }}
+                >
+                  <img
+                    className="min-h-[120px] object-cover rounded-md"
+                    src={scene.image}
+                    alt={scene.title}
+                  />
+                  <p className="text-white py-2 text-center">{scene.title}</p>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
+        >
+          <PhotoIcon className={iconStyle} />
+        </Tippy>
+      </div>
       <Tippy
         delay={[300, 300]}
         hideOnClick
