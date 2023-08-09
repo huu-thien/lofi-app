@@ -6,6 +6,7 @@ import SauNhungLanDau from "@/assets/audio/chill_lyric/SauNhungLanDau.mp3";
 import SuytNuathi from "@/assets/audio/chill_lyric/SuytNuaThi.mp3";
 
 // Lofi Không Lời
+import WhereIgo from "@/assets/audio/chill_no_lyric/gerardomillanenochwhereverigo.mp3";
 import WalkingOnClouds from "@/assets/audio/chill_no_lyric/WalkingOnClouds.mp3";
 import LeapOfFraith from "@/assets/audio/chill_no_lyric/LeapOfFaith.mp3";
 import WhispersInTheMist from "@/assets/audio/chill_no_lyric/WhispersInTheMist.mp3";
@@ -38,16 +39,21 @@ export const playlist: PlaylistType[] = [
     songs: [
       {
         id: 1,
+        name: "Where I go",
+        src: WhereIgo,
+      },
+      {
+        id: 2,
         name: "Walking On Clouds",
         src: WalkingOnClouds,
       },
       {
-        id: 2,
+        id: 3,
         name: "Leap Of Fraith",
         src: LeapOfFraith,
       },
       {
-        id: 3,
+        id: 4,
         name: "Whispers In The Mist",
         src: WhispersInTheMist,
       },

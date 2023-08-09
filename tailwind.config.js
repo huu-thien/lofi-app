@@ -6,6 +6,7 @@ export default {
       colors: {
         "red-primary": "rgba(180,18,18,0.75)",
         "black-primary": "rgba(18,18,18,0.75)",
+        "white-primary": "rgba(255,255,255,0.75)",
         "gray-primary": "#858080"
       },
       fontFamily: {

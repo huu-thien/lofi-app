@@ -21,3 +21,8 @@ export interface ScenesType {
   video_night: string;
   image: string;
 }
+export interface SoundsEffectType {
+  id: number;
+  title: string;
+  sound: string;
+}

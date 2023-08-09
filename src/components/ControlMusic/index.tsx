@@ -29,7 +29,7 @@ const ControlMusic = () => {
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [isRepeat, setIsRepeat] = useState<boolean>(false);
   const [volumn, setVolumn] = useState<number>(0.5);
-  const [inputVolemeValue, setInputVolemeValue] = useState<number>(0.5);
+  const [inputVolemeValue, setInputVolemeValue] = useState<number>(50);
 
   // ref
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -37,7 +37,7 @@ const ControlMusic = () => {
   const playSong = (): void => {
     if (audioRef.current) {
       audioRef.current.play();
-      // audioRef.current.volume = volumn;
+      audioRef.current.volume = volumn;
     }
   };
   // Pause song
@@ -109,9 +109,7 @@ const ControlMusic = () => {
         ref={audioRef}
         onEnded={handleRepeatSong}
       />
-
-      <div className="flex flex-col min-w-[200px] mr-8">
-        <span className="text-white text-center pb-1">{currentSong.name}</span>
+      {/* <div className="flex flex-col min-w[60]">
         <div className="waves-loading mx-auto">
           <span></span>
           <span></span>
@@ -121,7 +119,8 @@ const ControlMusic = () => {
           <span></span>
           <span></span>
         </div>
-      </div>
+      </div> */}
+        {/* <span className="text-white text-center pb-1">{currentSong.name}</span> */}
 
       <BackwardIcon className={iconStyle} onClick={handlePrevSong} />
       {!isPlaying ? (
@@ -146,7 +145,7 @@ const ControlMusic = () => {
         delay={[300, 300]}
         hideOnClick
         interactive
-        offset={[10, 30]}
+        offset={[10, 20]}
         render={() => (
           <p className="p-3 bg-black-primary text-white border rounded-md">
             {isRepeat ? "Not Repeat" : "Repeat"}
@@ -163,7 +162,7 @@ const ControlMusic = () => {
           delay={[300, 300]}
           hideOnClick
           interactive
-          offset={[10, 30]}
+          offset={[10, 20]}
           render={() => (
             <p className="p-3 bg-black-primary text-white border rounded-md">
               Unmute
@@ -172,7 +171,9 @@ const ControlMusic = () => {
         >
           <SpeakerXMarkIcon
             className={iconStyle}
-            onClick={() => setIsMuted(!isMuted)}
+            onClick={() => {
+              setIsMuted(!isMuted);
+            }}
           />
         </Tippy>
       ) : (
@@ -180,7 +181,7 @@ const ControlMusic = () => {
           delay={[300, 300]}
           hideOnClick
           interactive
-          offset={[10, 30]}
+          offset={[10, 20]}
           render={() => (
             <div className="bg-black-primary p-3 border rounded-md">
               <input
@@ -206,7 +207,7 @@ const ControlMusic = () => {
         delay={[300, 300]}
         hideOnClick
         interactive
-        offset={[10, 30]}
+        offset={[10, 20]}
         render={() => (
           <div className="py-3 bg-black-primary text-white opacity-80 rounded-md border">
             <p className="font-bold px-4 pb-2 border-b">Select Playlist</p>

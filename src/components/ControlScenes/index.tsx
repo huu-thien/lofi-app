@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { ScenesType } from "@/shared/types";
 import { ScenesList } from "@/data/ScenesList";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 type Propstype = {
   setScenes: (value: ScenesType) => void;
@@ -17,16 +18,19 @@ const ControlScenes = ({
   isNightTheme,
   setIsNightTheme,
 }: Propstype) => {
+  const isAboveTabletScreens = useMediaQuery("(max-width: 768px)");
+
   const iconStyle =
     "w-8 h-8 rounded-md text-white p-1 mx-2 cursor-pointer hover:scale-[1.1] hover:bg-red-primary transition duration-400";
-
+  const tabletScreenStyle = `absolute top-10 left-4 p-3 bg-black-primary border rounded-md flex`;
   return (
-    <div className="flex">
+    <div className={isAboveTabletScreens ? tabletScreenStyle : "flex"}>
+      
       <Tippy
         delay={[300, 300]}
         hideOnClick
         interactive
-        offset={[10, 30]}
+        offset={[10, 20]}
         render={() => (
           <Swiper
             className="flex items-center bg-black-primary p-6 max-w-[400px] border rounded-md"
@@ -59,7 +63,7 @@ const ControlScenes = ({
         delay={[300, 300]}
         hideOnClick
         interactive
-        offset={[10, 30]}
+        offset={[10, 20]}
         render={() => (
           <p className="p-3 bg-black-primary text-white border rounded-md">
             {isNightTheme

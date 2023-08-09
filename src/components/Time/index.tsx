@@ -7,7 +7,7 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 const Time = () => {
   const isAboveMediumScreens = useMediaQuery("(max-width: 1024px)");
 
-  const mediumScreenStyle = `absolute top-10 right-6 p-4 bg-black-primary border rounded-md`
+  const mediumScreenStyle = `absolute top-10 right-4 p-4 bg-black-primary border rounded-md`;
 
   const [time, setTime] = useState<TypeTime>({
     hours: "0",
