@@ -5,6 +5,7 @@ export interface TypeTime {
   period: string;
 }
 export interface SongType {
+  id: number;
   name: string;
   src: string;
 }

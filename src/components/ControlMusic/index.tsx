@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   BackwardIcon,
   ForwardIcon,
@@ -7,40 +7,163 @@ import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
   MusicalNoteIcon,
+  ArrowPathRoundedSquareIcon,
 } from "@heroicons/react/24/outline";
 import Tippy from "@tippyjs/react/headless";
 import { playlist } from "@/data/PlayList";
-
+import { PlaylistType, SongType } from "@/shared/types";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 const ControlMusic = () => {
+  // const isAboveMediumScreens = useMediaQuery("(max-width: 1024px)");
+  // const isAboveMobleScreens = useMediaQuery("(max-width: 768px)");
+  const iconStyle =
+    "w-8 h-8 rounded-md text-white p-1 mx-2 cursor-pointer hover:scale-[1.1] hover:bg-red-primary transition duration-400 focus:border-none";
+  // Manage songs
+  const [playList, setPlayList] = useState<PlaylistType>(playlist[0]);
+  const [songs, setSongs] = useState<SongType[]>(playList.songs);
+  const [indexSong, setIndexSong] = useState<number>(0);
+  const [currentSong, setCurrentSong] = useState<SongType>(songs[indexSong]);
+
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(false);
-  const iconStyle =
-    "w-8 h-8 rounded-md text-white p-1 mx-2 cursor-pointer hover:scale-[1.1] hover:bg-red-primary transition duration-400";
-  const handleChangePlaylist = (playlist: string): void => {
-    console.log(playlist);
+  const [isRepeat, setIsRepeat] = useState<boolean>(false);
+  const [volumn, setVolumn] = useState<number>(0.5);
+  const [inputVolemeValue, setInputVolemeValue] = useState<number>(0.5);
+
+  // ref
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  // Play song
+  const playSong = (): void => {
+    if (audioRef.current) {
+      audioRef.current.play();
+      // audioRef.current.volume = volumn;
+    }
   };
+  // Pause song
+  const pauseSong = (): void => {
+    audioRef.current?.pause();
+  };
+  // Next Song
+  const handleNextSong = (): void => {
+    if (indexSong === songs.length - 1) {
+      setIndexSong(0);
+      setCurrentSong(songs[0]);
+    } else {
+      setIndexSong(indexSong + 1);
+      setCurrentSong(songs[indexSong + 1]);
+    }
+    playSong();
+  };
+  // Prev Song
+  const handlePrevSong = (): void => {
+    if (indexSong === 0) {
+      setIndexSong(songs.length - 1);
+      setCurrentSong(songs[songs.length - 1]);
+    } else {
+      setIndexSong(indexSong - 1);
+      setCurrentSong(songs[indexSong - 1]);
+    }
+    playSong();
+  };
+  // Repeat Song
+  const handleRepeatSong = (): void => {
+    if (isRepeat) {
+      playSong();
+    } else {
+      handleNextSong();
+    }
+  };
+  // Change Volumn
+  const handleChangvolumn = (value: number): void => {
+    setVolumn(value / 100);
+    setInputVolemeValue(value);
+    if (audioRef.current) {
+      audioRef.current.volume = volumn;
+    }
+  };
+
+  // Uptate những state phụ thuộc playList
+  useEffect(() => {
+    const updatedSongs = playList.songs;
+    setSongs(updatedSongs);
+    setIndexSong(0);
+    setCurrentSong(updatedSongs[0]);
+  }, [playList]);
+  useEffect(() => {
+    if (isMuted) {
+      if (audioRef.current) {
+        audioRef.current.volume = 0;
+      }
+    } else {
+      if (audioRef.current) {
+        audioRef.current.volume = volumn;
+      }
+    }
+  }, [isMuted]);
   return (
-    <div className="flex">
-      <BackwardIcon className={iconStyle} />
-      {isPlaying ? (
+    <div className="flex items-center">
+      <audio
+        src={currentSong.src}
+        autoPlay={isPlaying}
+        ref={audioRef}
+        onEnded={handleRepeatSong}
+      />
+
+      <div className="flex flex-col min-w-[200px] mr-8">
+        <span className="text-white text-center pb-1">{currentSong.name}</span>
+        <div className="waves-loading mx-auto">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <BackwardIcon className={iconStyle} onClick={handlePrevSong} />
+      {!isPlaying ? (
         <PlayCircleIcon
           className={iconStyle}
-          onClick={() => setIsPlaying(!isPlaying)}
+          onClick={() => {
+            setIsPlaying(!isPlaying);
+            playSong();
+          }}
         />
       ) : (
         <PauseCircleIcon
           className={iconStyle}
-          onClick={() => setIsPlaying(!isPlaying)}
+          onClick={() => {
+            setIsPlaying(!isPlaying);
+            pauseSong();
+          }}
         />
       )}
-      <ForwardIcon className={iconStyle} />
+      <ForwardIcon className={iconStyle} onClick={handleNextSong} />
+      <Tippy
+        delay={[300, 300]}
+        hideOnClick
+        interactive
+        offset={[10, 30]}
+        render={() => (
+          <p className="p-3 bg-black-primary text-white border rounded-md">
+            {isRepeat ? "Not Repeat" : "Repeat"}
+          </p>
+        )}
+      >
+        <ArrowPathRoundedSquareIcon
+          className={`${iconStyle} ${isRepeat ? "bg-red-primary" : ""}`}
+          onClick={() => setIsRepeat(!isRepeat)}
+        />
+      </Tippy>
       {isMuted ? (
         <Tippy
           delay={[300, 300]}
           hideOnClick
           interactive
-          offset={[10, 20]}
+          offset={[10, 30]}
           render={() => (
             <p className="p-3 bg-black-primary text-white border rounded-md">
               Unmute
@@ -57,16 +180,25 @@ const ControlMusic = () => {
           delay={[300, 300]}
           hideOnClick
           interactive
-          offset={[10, 20]}
+          offset={[10, 30]}
           render={() => (
             <div className="bg-black-primary p-3 border rounded-md">
-              <input type="range" min={0} max={100} className="accent-pink-500 cursor-pointer"/>
+              <input
+                className="accent-pink-500 cursor-pointer"
+                type="range"
+                min={0}
+                max={100}
+                value={inputVolemeValue}
+                onChange={(e) => handleChangvolumn(Number(e.target.value))}
+              />
             </div>
           )}
         >
           <SpeakerWaveIcon
             className={iconStyle}
-            onClick={() => setIsMuted(!isMuted)}
+            onClick={() => {
+              setIsMuted(!isMuted);
+            }}
           />
         </Tippy>
       )}
@@ -74,18 +206,18 @@ const ControlMusic = () => {
         delay={[300, 300]}
         hideOnClick
         interactive
-        offset={[10, 20]}
+        offset={[10, 30]}
         render={() => (
           <div className="py-3 bg-black-primary text-white opacity-80 rounded-md border">
             <p className="font-bold px-4 pb-2 border-b">Select Playlist</p>
             <ul>
-              {playlist.map((playlist, index) => (
+              {playlist.map((item, index) => (
                 <li
-                  key={`${playlist.name}-${index}`}
+                  key={`${item.name}-${index}`}
                   className="py-2 px-4 hover:bg-[rgba(255,255,255,0.3)] cursor-pointer"
-                  onClick={() => handleChangePlaylist(playlist.name)}
+                  onClick={() => setPlayList(item)}
                 >
-                  {playlist.name}
+                  {item.name} 💓
                 </li>
               ))}
             </ul>

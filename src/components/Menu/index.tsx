@@ -2,16 +2,33 @@ import ControlMusic from "../ControlMusic";
 import ControlScenes from "../ControlScenes";
 import Time from "../Time";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import { ScenesType } from "@/shared/types";
 
-function Menu() {
-  const isAboveMediumScreens = useMediaQuery("(max-width: 768px)");
-  const containerStyle = `h-14 px-4 fixed bottom-6 right-6 left-6 bg-black-primary border rounded-md flex items-center justify-between`
+type Propstype = {
+  setScenes: (value: ScenesType) => void;
+  isNightTheme: boolean;
+  setIsNightTheme: (value: boolean) => void;
+};
+
+function Menu({ setScenes, isNightTheme, setIsNightTheme }: Propstype) {
+  const isAboveMediumScreens = useMediaQuery("(max-width: 1024px)");
+  const isAboveTabletScreens = useMediaQuery("(max-width: 768px)");
+
+  const containerStyle = `h-20 px-4 fixed bottom-6 right-6 left-6 bg-black-primary border rounded-md flex items-center ${
+    isAboveTabletScreens ? "justify-center" : "justify-between"
+  } `;
 
   return (
     <div className={containerStyle}>
       {!isAboveMediumScreens && <Time />}
       <ControlMusic />
-      <ControlScenes />
+      {!isAboveTabletScreens && (
+        <ControlScenes
+          setScenes={setScenes}
+          isNightTheme={isNightTheme}
+          setIsNightTheme={setIsNightTheme}
+        />
+      )}
     </div>
   );
 }

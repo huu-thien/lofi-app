@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import useMediaQuery from "@/hooks/useMediaQuery";
 
 const Time = () => {
-  const isAboveMediumScreens = useMediaQuery("(max-width: 768px)");
+  const isAboveMediumScreens = useMediaQuery("(max-width: 1024px)");
 
   const mediumScreenStyle = `absolute top-10 right-6 p-4 bg-black-primary border rounded-md`
 
