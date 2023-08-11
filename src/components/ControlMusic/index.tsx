@@ -120,7 +120,7 @@ const ControlMusic = () => {
           <span></span>
         </div>
       </div> */}
-        {/* <span className="text-white text-center pb-1">{currentSong.name}</span> */}
+      {/* <span className="text-white text-center pb-1">{currentSong.name}</span> */}
 
       <BackwardIcon className={iconStyle} onClick={handlePrevSong} />
       {!isPlaying ? (
@@ -147,7 +147,7 @@ const ControlMusic = () => {
         interactive
         offset={[10, 20]}
         render={() => (
-          <p className="p-3 bg-black-primary text-white border rounded-md">
+          <p className="p-3 bg-[#363636] text-white border rounded-md">
             {isRepeat ? "Not Repeat" : "Repeat"}
           </p>
         )}
@@ -164,7 +164,7 @@ const ControlMusic = () => {
           interactive
           offset={[10, 20]}
           render={() => (
-            <p className="p-3 bg-black-primary text-white border rounded-md">
+            <p className="p-3 bg-[#363636] text-white border rounded-md">
               Unmute
             </p>
           )}
@@ -183,7 +183,7 @@ const ControlMusic = () => {
           interactive
           offset={[10, 20]}
           render={() => (
-            <div className="bg-black-primary p-3 border rounded-md">
+            <div className="bg-[#363636] p-3 border rounded-md">
               <input
                 className="accent-pink-500 cursor-pointer"
                 type="range"
@@ -209,7 +209,7 @@ const ControlMusic = () => {
         interactive
         offset={[10, 20]}
         render={() => (
-          <div className="py-3 bg-black-primary text-white opacity-80 rounded-md border">
+          <div className="py-3 bg-[#363636] text-white rounded-md border">
             <p className="font-bold px-4 pb-2 border-b">Select Playlist</p>
             <ul>
               {playlist.map((item, index) => (

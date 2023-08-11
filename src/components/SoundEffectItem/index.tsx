@@ -73,7 +73,7 @@ const SoundEffectItem = ({ sound }: PropsType) => {
             handleToggleSound();
           }}
         >
-          {soundPlaying ? (
+          {(soundPlaying && volume > 0) ? (
             <div className="w-3 h-3 rounded-full bg-[#fcce00]"></div>
           ) : (
             <div className="w-2 h-2 rounded-full bg-white"></div>
