@@ -6,7 +6,7 @@ import CityTraffic from "@/assets/audio/sound-effect/city_traffic.mp3";
 import ForestNight from "@/assets/audio/sound-effect/forest_night.mp3";
 import RainCity from "@/assets/audio/sound-effect/rain_city.mp3";
 import RainForest from "@/assets/audio/sound-effect/rain_forest.mp3";
-import RiverSound from "@/assets/audio/sound-effect/river_sound.mp3";
+import RiverSound from "@/assets/audio/sound-effect/river.mp3";
 import SummerStorm from "@/assets/audio/sound-effect/summer_storm.mp3";
 import WavesSound from "@/assets/audio/sound-effect/waves.mp3";
 

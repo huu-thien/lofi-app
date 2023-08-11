@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import Tippy from "@tippyjs/react/headless";
 import { Swiper, SwiperSlide } from "swiper/react";

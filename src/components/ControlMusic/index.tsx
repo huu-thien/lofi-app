@@ -12,7 +12,7 @@ import {
 import Tippy from "@tippyjs/react/headless";
 import { playlist } from "@/data/PlayList";
 import { PlaylistType, SongType } from "@/shared/types";
-import useMediaQuery from "@/hooks/useMediaQuery";
+// import useMediaQuery from "@/hooks/useMediaQuery";
 
 const ControlMusic = () => {
   // const isAboveMediumScreens = useMediaQuery("(max-width: 1024px)");

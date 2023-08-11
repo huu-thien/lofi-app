@@ -8,7 +8,8 @@ import Time from "./components/Time";
 import { ScenesList } from "./data/ScenesList";
 import { ScenesType } from "./shared/types";
 import ControlScenes from "./components/ControlScenes";
-import SoundsEffect from "./components/SoundsEffect";
+import SoundEffectList from "./components/SoundEffectList";
+
 
 function App() {
   const isAboveMediumScreens = useMediaQuery("(max-width: 1024px)");
@@ -29,7 +30,7 @@ function App() {
         />
       )}
       {!isAboveMediumScreens && <Logo />}
-      <SoundsEffect />
+      <SoundEffectList />
       <Menu
         setScenes={setScenes}
         isNightTheme={isNightTheme}
